@@ -1,0 +1,3 @@
+D:/Coding/Greenfox/moharos89/week-01/day-3/Even/cmake-build-debug/CMakeFiles/Even.dir
+D:/Coding/Greenfox/moharos89/week-01/day-3/Even/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Coding/Greenfox/moharos89/week-01/day-3/Even/cmake-build-debug/CMakeFiles/rebuild_cache.dir
