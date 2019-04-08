@@ -29,11 +29,9 @@ void fillarray(int array[], int a) {
 }
 
 int *maxValuePtr(int array[], int a) {
-    int max = 0;
-    int *maxptr = nullptr;
+    int *maxptr = &array[0];
     for (int i = 0; i < a; i++) {
-        if (array[i] > max) {
-            max = array[i];
+        if (array[i] > *maxptr) {
             maxptr = &array[i];
 
         }
