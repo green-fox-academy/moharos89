@@ -11,7 +11,7 @@ int main() {
     int array[a];
     fillarray(array, a);
     std::cout << &array[0] << std::endl;
-    std::cout << &array[4] << std::endl;
+    std::cout << &array[1] << std::endl;
     std::cout << *maxValuePtr(array, a) << " " << maxValuePtr(array, a) << std::endl;
     // Create a program which first asks for a number
     // this number indicates how many integers we want to store in an array
@@ -29,7 +29,7 @@ void fillarray(int array[], int a) {
 }
 
 int *maxValuePtr(int array[], int a) {
-    int *maxptr = &array[0];
+    int *maxptr = array;
     for (int i = 0; i < a; i++) {
         if (array[i] > *maxptr) {
             maxptr = &array[i];
