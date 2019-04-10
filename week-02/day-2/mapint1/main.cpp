@@ -34,7 +34,7 @@ int main() {
         std::cout << "There are no such thing!" << std::endl;
     }
     myMap.clear();
-    
+
 
 
 
