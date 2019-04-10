@@ -15,66 +15,65 @@ bool init();
 void close();
 
 //The window we'll be rendering to
-SDL_Window* gWindow = nullptr;
+SDL_Window *gWindow = nullptr;
 
 //The window renderer
-SDL_Renderer* gRenderer = nullptr;
+SDL_Renderer *gRenderer = nullptr;
 
-void draw()
-{
+void draw(int a, int color[]) {
+    //choose color
+    SDL_SetRenderDrawColor(gRenderer, color[0], color[1], color[2], 0xFF);
+//create a rectangle
+    SDL_Rect fillRect = {SCREEN_WIDTH / 2 - a / 2, SCREEN_HEIGHT / 2 - a / 2, a, a};
+//draw rectangle
+    SDL_RenderFillRect(gRenderer, &fillRect);
     // Create a square drawing function that takes 2 parameters:
     // The square size, and the fill color,
     // and draws a square of that size and color to the center of the canvas.
     // Create a loop that fills the canvas with rainbow colored squares.
 }
 
-bool init()
-{
+bool init() {
     //Initialize SDL
-    if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
-    {
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         std::cout << "SDL could not initialize! SDL Error: " << SDL_GetError() << std::endl;
         return false;
     }
 
     //Create window
-    gWindow = SDL_CreateWindow( "Rainbow box function", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-    if( gWindow == nullptr )
-    {
+    gWindow = SDL_CreateWindow("Rainbow box function", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
+                               SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    if (gWindow == nullptr) {
         std::cout << "Window could not be created! SDL Error: " << SDL_GetError() << std::endl;
         return false;
     }
 
     //Create renderer for window
-    gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED );
-    if( gRenderer == nullptr )
-    {
+    gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+    if (gRenderer == nullptr) {
         std::cout << "Renderer could not be created! SDL Error: " << SDL_GetError() << std::endl;
         return false;
     }
 
     //Initialize renderer color
-    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
     return true;
 }
 
-void close()
-{
+void close() {
     //Destroy window
-    SDL_DestroyRenderer( gRenderer );
-    SDL_DestroyWindow( gWindow );
+    SDL_DestroyRenderer(gRenderer);
+    SDL_DestroyWindow(gWindow);
     gWindow = nullptr;
     gRenderer = nullptr;
 
     SDL_Quit();
 }
 
-int main( int argc, char* args[] )
-{
+int main(int argc, char *args[]) {
     //Start up SDL and create window
-    if( !init() )
-    {
+    if (!init()) {
         std::cout << "Failed to initialize!" << std::endl;
         close();
         return -1;
@@ -87,7 +86,7 @@ int main( int argc, char* args[] )
     SDL_Event e;
 
     //While application is running
-    while( !quit ) {
+    while (!quit) {
         //Handle events on queue
         while (SDL_PollEvent(&e) != 0) {
             //User requests quit
@@ -99,8 +98,10 @@ int main( int argc, char* args[] )
         //Clear screen
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
-
-        draw();
+        int a;
+        int color[3];
+        for (int i = 0; i < 480; i++)
+        draw(a, color);
 
         //Update screen
         SDL_RenderPresent(gRenderer);
