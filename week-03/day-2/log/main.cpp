@@ -40,6 +40,7 @@ void shredder(std::string line, std::vector<std::string> &ips) {
         int space = line.find("   ");
         std::string temp;
         temp = line.substr(space + 3, 11);
+        
         //std::cout << temp << std::endl;
         ips.push_back(temp);
     }
