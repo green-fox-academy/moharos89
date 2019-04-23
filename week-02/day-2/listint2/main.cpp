@@ -22,7 +22,7 @@ int main() {
     std::cout << listA.at(4) << std::endl;
     int comp1 = listA.size();
     int comp2 = listB.size();
-    if (comp1 / comp2 > 1) {
+    if (comp1 / comp2 >= 1) {
         std::cout << "listA is bigger, than listB" << std::endl;
     } else {
         std::cout << "ListB is bigger, than listA" << std::endl;
@@ -40,6 +40,14 @@ int main() {
     }
     std::vector<std::string> newfruits = {"Passion Fruit", "Pummelo"};
     std::vector<std::string>::iterator addo = newfruits.begin();
-    listB.insert(remIt + 3, addo, addo + 1);
+    listB.insert(remIt + 3, addo, addo + 2);
+    for (int i = 0; i < listB.size(); i++) {
+        std::cout << listB[i] << std::endl;
+    }
+    for (int i = 0; i < newfruits.size(); i++) {
+        std::cout << newfruits[i] << std::endl;
+    }
+    std::cout << listB.size() << std::endl;
+    std::cout << listA[2] << std::endl;
 
 }
