@@ -7,11 +7,12 @@
 const int SCREEN_WIDTH = 613;
 const int SCREEN_HEIGHT = 613;
 
-void fillmap(std::map<int, std::vector<int>> &boxes, int *aptr, int *redptr, int *greenptr,
-             int *blueptr);
+void fillmap(std::map<int, std::vector<int>> &boxes, int a, int red, int green,
+             int blue);
+void changer(int *redptr , int *greenptr , int *blueptr);
 
 //Draws geometry on the canvas
-void draw(std::map<int, std::vector<int>> *boxes, int *);
+void draw(std::map<int, std::vector<int>> *boxes);
 
 
 //Starts up SDL and creates window
@@ -27,14 +28,14 @@ SDL_Window *gWindow = nullptr;
 SDL_Renderer *gRenderer = nullptr;
 
 
-void draw(std::map<int, std::vector<int>> *boxes, int *aptr) {
+void draw(std::map<int, std::vector<int>> *boxes) {
     std::map<int, std::vector<int>>::iterator boxesIt = boxes->begin();
     for (; boxesIt != boxes->end(); boxesIt++) {
         std::vector<int> color = boxesIt->second;
         SDL_SetRenderDrawColor(gRenderer, boxesIt->second[0], boxesIt->second[1], boxesIt->second[2], 0xFF);
         SDL_Rect fillRect = {SCREEN_WIDTH / 2 - boxesIt->first / 2, SCREEN_HEIGHT / 2 - boxesIt->first / 2,
                              boxesIt->first,
-                             boxesIt->first};
+        boxesIt->first};
         SDL_RenderDrawRect(gRenderer, &fillRect);
     }
 
@@ -91,7 +92,7 @@ int main(int argc, char *args[]) {
     int red = 255;
     int green = 0;
     int blue = 0;
-    int *aptr = &a;
+
 
 
     //Main loop flag
@@ -113,12 +114,15 @@ int main(int argc, char *args[]) {
         //Clear screen
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
-        fillmap(boxes, aptr, &red, &green, &blue);
-        draw(&boxes, &a);
+
+        changer(&red , &green , &blue);
+        fillmap(boxes, a, red, green, blue);
+        draw(&boxes);
+
 
 
         //Update screen
-        SDL_RenderPresent(gRenderer);
+       SDL_RenderPresent(gRenderer);
     }
 
     //Free resources and close SDL
@@ -128,49 +132,66 @@ int main(int argc, char *args[]) {
 }
 
 
-void fillmap(std::map<int, std::vector<int>> &boxes, int *aptr, int *redptr, int *greenptr,
-             int *blueptr) {
+void fillmap(std::map<int, std::vector<int>> &boxes, int a, int red, int green,
+             int blue) {
 
     for (int i = 0; i <= 306; ++i) {
         std::vector<int> colors;
-        boxes[*aptr] = colors;
+        boxes[a] = colors;
 
-        if (*redptr == 255 && *blueptr == 0 && *greenptr != 255) {
-            boxes[*aptr].push_back(*redptr);
-            boxes[*aptr].push_back(*greenptr);
-            boxes[*aptr].push_back(*blueptr);
-            *greenptr += 5;
-            *aptr += 2;
-        } else if (*greenptr == 255 && *blueptr == 0 && *redptr != 0) {
-            boxes[*aptr].push_back(*redptr);
-            boxes[*aptr].push_back(*greenptr);
-            boxes[*aptr].push_back(*blueptr);
-            *redptr -= 5;
-            *aptr += 2;
-        } else if (*redptr == 0 && *greenptr == 255 && *blueptr != 255) {
-            boxes[*aptr].push_back(*redptr);
-            boxes[*aptr].push_back(*greenptr);
-            boxes[*aptr].push_back(*blueptr);
-            *blueptr += 5;
-            *aptr += 2;
-        } else if (*redptr == 0 && *blueptr == 255 && *greenptr != 0) {
-            boxes[*aptr].push_back(*redptr);
-            boxes[*aptr].push_back(*greenptr);
-            boxes[*aptr].push_back(*blueptr);
-            *greenptr -= 5;
-            *aptr += 2;
-        } else if (*greenptr == 0 && *blueptr == 255 && *redptr != 255) {
-            boxes[*aptr].push_back(*redptr);
-            boxes[*aptr].push_back(*greenptr);
-            boxes[*aptr].push_back(*blueptr);
-            *redptr += 5;
-            *aptr += 2;
+
+        if (red == 255 && blue == 0 && green != 255) {
+            boxes[a].push_back(red);
+            boxes[a].push_back(green);
+            boxes[a].push_back(blue);
+            green += 5;
+            a += 2;
+        } else if (green == 255 && blue == 0 && red != 0) {
+            boxes[a].push_back(red);
+            boxes[a].push_back(green);
+            boxes[a].push_back(blue);
+            red -= 5;
+            a += 2;
+        } else if (red == 0 && green == 255 && blue != 255) {
+            boxes[a].push_back(red);
+            boxes[a].push_back(green);
+            boxes[a].push_back(blue);
+            blue += 5;
+            a += 2;
+        } else if (red == 0 && blue == 255 && green != 0) {
+            boxes[a].push_back(red);
+            boxes[a].push_back(green);
+            boxes[a].push_back(blue);
+            green -= 5;
+            a += 2;
+        } else if (green == 0 && blue == 255 && red != 255) {
+            boxes[a].push_back(red);
+            boxes[a].push_back(green);
+            boxes[a].push_back(blue);
+            red += 5;
+            a += 2;
         } else {
-            boxes[*aptr].push_back(*redptr);
-            boxes[*aptr].push_back(*greenptr);
-            boxes[*aptr].push_back(*blueptr);
-            *blueptr -= 5;
-            *aptr += 2;
+            boxes[a].push_back(red);
+            boxes[a].push_back(green);
+            boxes[a].push_back(blue);
+            blue -= 5;
+            a += 2;
         }
     }
+}
+void changer(int *redptr , int *greenptr , int *blueptr) {
+    if (*redptr == 255 && *blueptr == 0 && *greenptr != 255) {
+        *greenptr += 5;
+    } else if (*greenptr == 255 && *blueptr == 0 && *redptr != 0) {
+        *redptr -= 5;
+    } else if (*redptr == 0 && *greenptr == 255 && *blueptr != 255) {
+        *blueptr += 5;
+    } else if (*redptr == 0 && *blueptr == 255 && *greenptr != 0) {
+        *greenptr -= 5;
+    } else if (*greenptr == 0 && *blueptr == 255 && *redptr != 255) {
+        *redptr += 5;
+    } else {
+        *blueptr -= 5;
+    }
+
 }
