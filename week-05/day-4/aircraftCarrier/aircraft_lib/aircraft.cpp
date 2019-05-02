@@ -4,7 +4,8 @@
 
 #include "aircraft.h"
 
-Aircraft::Aircraft() {
+Aircraft::Aircraft()
+{
     setAmmo(0);
 
 }
@@ -41,19 +42,23 @@ void Aircraft::setBaseDamage(int baseDamage)
 
 int Aircraft::fight()
 {
-    int shot = (0 - _ammo) * (- 1);
+    int shot = (0 - _ammo) * (-1);
     setAmmo(0);
     return shot * _baseDamage;
 }
 
 int Aircraft::refill(int ammo)
 {
-    if(ammo >= _ammomax) {
-        setAmmo(_ammomax);
-        return ammo - _ammomax;
+    if (_ammomax != _ammo) {
+        if (ammo >= _ammomax) {
+            setAmmo(_ammomax);
+            return ammo - _ammomax;
+        } else {
+            setAmmo(ammo);
+            return 0;
+        }
     } else {
-        setAmmo(ammo);
-        return 0;
+        return ammo;
     }
 
 }

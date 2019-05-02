@@ -53,7 +53,32 @@ void AircraftCarrier::add(Aircraft *aircraft)
 
 void AircraftCarrier::fill()
 {
-    
+    try {
+        if (_amountOfAmmo == 0) {
+            throw std::exception();
+        }
+        int neededAmmo = 0;
+        for (int i = 0; i < _warPlanes.size(); ++i) {
+            neededAmmo += _warPlanes[i].getAmmomax() - _warPlanes[i].getAmmo();
+        }
+        if (neededAmmo < _amountOfAmmo) {
+            for (int i = 0; i < _warPlanes.size(); ++i) {
+                if (_warPlanes[i].isPriority()) {
+                    setAmountOfAmmo(_warPlanes[i].refill(_amountOfAmmo));
+                }
+            }
+            for (int j = 0; j < _warPlanes.size(); ++j) {
+                setAmountOfAmmo(_warPlanes[j].refill(_amountOfAmmo));
+            }
+        } else {
+            for (int k = 0; k < _warPlanes.size(); ++k) {
+                setAmountOfAmmo(_warPlanes[k].refill(_amountOfAmmo));
+            }
+        }
+
+    } catch (std::exception e) {
+        std::cout << "There is no ammo left" << std::endl;
+    }
 }
 
 std::string AircraftCarrier::status()
