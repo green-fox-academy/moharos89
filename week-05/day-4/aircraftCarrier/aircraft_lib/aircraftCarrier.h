@@ -32,6 +32,8 @@ public:
 
     std::string status();
 
+    void fight(AircraftCarrier *aircraftCarrier);
+
 private:
     std::vector<Aircraft *> _warPlanes;
     int _amountOfAmmo;

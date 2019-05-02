@@ -36,9 +36,6 @@ public:
 
 private:
     int _ammo;
-
-
-private:
     int _ammomax;
     int _baseDamage;
 

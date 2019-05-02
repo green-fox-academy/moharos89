@@ -16,6 +16,16 @@ AircraftCarrier::AircraftCarrier(int healthPoint, int amountOfAmmo)
     setAmountOfAmmo(amountOfAmmo);
 }
 
+const std::vector<Aircraft *> &AircraftCarrier::getWarPlanes() const
+{
+    return _warPlanes;
+}
+
+void AircraftCarrier::setWarPlanes(const std::vector<Aircraft *> &warPlanes)
+{
+    _warPlanes = warPlanes;
+}
+
 int AircraftCarrier::getAmountOfAmmo() const
 {
     return _amountOfAmmo;
@@ -45,13 +55,13 @@ void AircraftCarrier::fill()
 {
     try {
         if (_amountOfAmmo == 0) {
-            throw std::exception();
+                throw std::exception();
         }
         int neededAmmo = 0;
         for (int i = 0; i < _warPlanes.size(); ++i) {
             neededAmmo += _warPlanes[i]->getAmmomax() - _warPlanes[i]->getAmmo();
         }
-        if (neededAmmo < _amountOfAmmo) {
+        if (neededAmmo > _amountOfAmmo) {
             for (int l = 0; l < _warPlanes.size(); ++l) {
                 if (_warPlanes[l]->isPriority()) {
                     setAmountOfAmmo(_warPlanes[l]->refill(_amountOfAmmo));
@@ -73,28 +83,30 @@ void AircraftCarrier::fill()
 
 std::string AircraftCarrier::status()
 {
-    std::string status;
-    status = "HP: " + std::to_string(getHealthPoint()) + ", Aircraft count: " + std::to_string(_warPlanes.size());
-    status + ", Ammo Storage: " + std::to_string(_amountOfAmmo) + ", Total damage ";
-    int sum = 0;
+    if (getHealthPoint() > 0) {
+        std::string status;
+        status = "HP: " + std::to_string(getHealthPoint()) + ", Aircraft count: " + std::to_string(_warPlanes.size());
+        status += ", Ammo Storage: " + std::to_string(_amountOfAmmo) + ", Total damage ";
+        int sum = 0;
+        for (int i = 0; i < _warPlanes.size(); ++i) {
+            sum += _warPlanes[i]->getAmmo() * _warPlanes[i]->getBaseDamage();
+        }
+        status += std::to_string(sum) + "\n";
+        status += "Aircrafts: \n";
+        for (int j = 0; j < _warPlanes.size(); ++j) {
+            status += _warPlanes[j]->getStatus() + "\n";
+        }
+        return status;
+    } else {
+        return "It's dead Jim";
+    }
+}
+
+void AircraftCarrier::fight(AircraftCarrier *aircraftCarrier)
+{
     for (int i = 0; i < _warPlanes.size(); ++i) {
-        sum += _warPlanes[i]->getAmmo() * _warPlanes[i]->getBaseDamage();
+        int remainingHealth = aircraftCarrier->getHealthPoint() - _warPlanes[i]->fight();
+        aircraftCarrier->setHealthPoint(remainingHealth);
     }
-    status + std::to_string(sum) + "\n";
-    status + "Aircrafts: \n";
-    for (int j = 0; j < _warPlanes.size(); ++j) {
-        status + _warPlanes[j]->getStatus() + "\n";
-    }
-    return status;
-}
-
-const std::vector<Aircraft *> &AircraftCarrier::getWarPlanes() const
-{
-    return _warPlanes;
-}
-
-void AircraftCarrier::setWarPlanes(const std::vector<Aircraft *> &warPlanes)
-{
-    _warPlanes = warPlanes;
 }
 
