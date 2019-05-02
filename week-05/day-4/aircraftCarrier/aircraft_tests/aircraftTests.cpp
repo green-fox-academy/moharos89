@@ -3,6 +3,7 @@
 //
 
 #include <gtest/gtest.h>
+#include <f35.h>
 #include "f16.h"
 
 TEST(F16, testSet_getAmmo) {
@@ -92,4 +93,92 @@ TEST(F16, testPriority) {
 
     //Assert
     ASSERT_EQ(result, false);
+}
+TEST(F35, testSet_getAmmo) {
+//Arrange
+F35 f35test1;
+int ammo = 10;
+//Act
+f35test1.setAmmo(ammo);
+
+//Assert
+ASSERT_EQ(f35test1.getAmmo(), 10);
+}
+
+TEST(F35, testRefillWithMoreThanCapacityAndCheckAmmo) {
+    //Arrange
+    F35 f35test1;
+    //Act
+    f35test1.refill(23);
+
+    //Assert
+    ASSERT_EQ(f35test1.getAmmo(), 12);
+}
+
+TEST(F35, testRefillWithMoreThanCapacityAndTestReturnValue) {
+    //Arrange
+    F35 f35test1;
+    //Act
+    int result = f35test1.refill(23);
+
+    //Assert
+    ASSERT_EQ(result, 23 - 12);
+}
+
+TEST(F35, testRefillWithLessThanCapacityAndCheckAmmo) {
+    //Arrange
+    F35 f35test1;
+    //Act
+    f35test1.refill(4);
+
+    //Assert
+    ASSERT_EQ(f35test1.getAmmo(), 4);
+}
+
+TEST(F35, testRefillWithLessThanCapacityAndTestReturnValue) {
+    //Arrange
+    F35 f35test1;
+    //Act
+    int result = f35test1.refill(5);
+
+    //Assert
+    ASSERT_EQ(result, 0);
+}
+TEST(F35, testFightWithFullAmmo) {
+    //Arrange
+    F35 f35test1;
+    //Act
+    f35test1.refill(12);
+    int result = f35test1.fight();
+
+    //Assert
+    ASSERT_EQ(result, 12 * f35test1.getBaseDamage());
+}
+TEST(F35, testFightWithNoFullAmmo) {
+    //Arrange
+    F35 f35test1;
+    //Act
+    f35test1.refill(3);
+    int result = f35test1.fight();
+
+    //Assert
+    ASSERT_EQ(result, 3 * f35test1.getBaseDamage());
+}
+TEST(F35, testFightWithNoAmmo) {
+    //Arrange
+    F35 f35test1;
+    //Act
+    int result = f35test1.fight();
+
+    //Assert
+    ASSERT_EQ(result, 0);
+}
+TEST(F35, testPriority) {
+    //Arrange
+    F35 f35test1;
+    //Act
+    bool result = f35test1.isPriority();
+
+    //Assert
+    ASSERT_EQ(result, true);
 }

@@ -9,9 +9,9 @@
 #include "aircraft.h"
 
 class F35 : public Aircraft {
+public:
     F35();
 
-public:
     std::string getType() override;
 
     std::string getStatus() override;

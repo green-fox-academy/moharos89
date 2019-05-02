@@ -4,6 +4,11 @@
 
 #include "f35.h"
 
+F35::F35() : Aircraft()
+{
+    setBaseDamage(50);
+    setAmmomax(12);
+}
 std::string F35::getType()
 {
     return "F35";
@@ -21,3 +26,5 @@ bool F35::isPriority()
 {
     return true;
 }
+
+
