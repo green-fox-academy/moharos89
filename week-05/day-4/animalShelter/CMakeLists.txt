@@ -3,4 +3,4 @@ project(animalShelter)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(animalShelter main.cpp animal.cpp animal.h cat.cpp cat.h dog.cpp dog.h)
+add_executable(animalShelter main.cpp animal.cpp animal.h cat.cpp cat.h dog.cpp dog.h parrot.cpp parrot.h)
