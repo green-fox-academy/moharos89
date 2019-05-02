@@ -31,12 +31,14 @@ public:
 
     bool isAdoptable();
 
+    void toString();
+
 
 
 private:
     std::string _name;
     bool _isHealthy;
-    int healCost;
+    int _healCost;
 
 
 };
