@@ -10,6 +10,11 @@
 
 class Parrot : public Animal {
 public:
+    Parrot();
+
+    Parrot(const std::string &name);
+
+    Parrot(const std::string &name, bool isHealthy);
 
 private:
 };
