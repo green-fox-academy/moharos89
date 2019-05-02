@@ -5,7 +5,7 @@
 
 int main() {
 
-    AircraftCarrier boat1(3000 , 300);
+    AircraftCarrier boat1(3000 , 250);
     F16 plane1;
     F16 plane2;
     F16 plane3;
@@ -28,6 +28,14 @@ int main() {
     boat1.add(&plane10);
     std::cout << boat1.status() << std::endl;
     boat1.fill();
+    std::cout << boat1.status() << std::endl;
+    AircraftCarrier boat2;
+    std::cout << boat2.status() << std::endl;
+    boat1.fight(&boat2);
+    boat1.fill();
+    boat1.fight(&boat2);
+    boat1.fill();
+    std::cout << boat2.status() << std::endl;
     std::cout << boat1.status() << std::endl;
     std::cout << "Hello, World!" << std::endl;
     return 0;
