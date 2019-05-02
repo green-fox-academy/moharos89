@@ -11,6 +11,7 @@
 class AircraftCarrier {
 public:
     AircraftCarrier();
+
     AircraftCarrier(int healthPoint , int amountOfAmmo);
 
     const std::vector<Aircraft> &getWarPlanes() const;
@@ -24,6 +25,12 @@ public:
     int getHealthPoint() const;
 
     void setHealthPoint(int healthPoint);
+
+    void add(Aircraft *aircraft);
+
+    void fill();
+
+    std::string status();
 
 private:
     std::vector<Aircraft> _warPlanes;
