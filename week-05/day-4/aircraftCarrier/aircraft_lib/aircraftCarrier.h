@@ -14,10 +14,6 @@ public:
 
     AircraftCarrier(int healthPoint , int amountOfAmmo);
 
-    const std::vector<Aircraft> &getWarPlanes() const;
-
-    void setWarPlanes(const std::vector<Aircraft> &warPlanes);
-
     int getAmountOfAmmo() const;
 
     void setAmountOfAmmo(int amountOfAmmo);
@@ -28,12 +24,16 @@ public:
 
     void add(Aircraft *aircraft);
 
+    const std::vector<Aircraft *> &getWarPlanes() const;
+
+    void setWarPlanes(const std::vector<Aircraft *> &warPlanes);
+
     void fill();
 
     std::string status();
 
 private:
-    std::vector<Aircraft> _warPlanes;
+    std::vector<Aircraft *> _warPlanes;
     int _amountOfAmmo;
     int _healthPoint;
 
