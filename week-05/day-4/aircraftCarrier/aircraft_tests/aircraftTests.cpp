@@ -24,3 +24,12 @@ TEST(F16 , testRefillWithMoreThanCapacityAndCheckAmmo) {
     //Assert
     ASSERT_EQ(f16test1.getAmmo(), 8);
 }
+TEST(F16 , testRefillWithMoreThanCapacityAndTestReturnValue) {
+    //Arrange
+    F16 f16test1;
+    //Act
+    int result = f16test1.refill(23);
+
+    //Assert
+    ASSERT_EQ(result, 23 - 8);
+}
