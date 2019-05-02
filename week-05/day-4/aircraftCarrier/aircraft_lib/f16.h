@@ -20,9 +20,9 @@ public:
 
     void setAmmo(int ammo);
 
-    void getType() override;
+    std::string getType() override;
 
-    void getStatus() override;
+    std::string getStatus() override;
 
     bool isPriority() override;
 

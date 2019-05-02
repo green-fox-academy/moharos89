@@ -13,8 +13,8 @@ public:
     Aircraft();
     virtual int fight() = 0;
     virtual int refill(int ammo) = 0;
-    virtual void getType() = 0;
-    virtual void getStatus() = 0;
+    virtual std::string getType() = 0;
+    virtual std::string getStatus() = 0;
     virtual bool isPriority() = 0;
 
 private:

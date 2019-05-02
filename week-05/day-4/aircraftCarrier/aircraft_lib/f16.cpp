@@ -24,7 +24,7 @@ int F16::fight() {
 }
 
 int F16::refill(int ammo) {
-    if(ammo >= 8) {
+    if (ammo >= 8) {
         setAmmo(8);
         int newAmmo = ammo - 8;
         return newAmmo;
@@ -35,12 +35,15 @@ int F16::refill(int ammo) {
 
 }
 
-void F16::getType() {
+std::string F16::getType() {
+    return "F16";
 
 }
 
-void F16::getStatus() {
-
+std::string F16::getStatus() {
+    std::string status =
+            "Type: " + getType() + ", Ammo: " + std::to_string(_ammo) + ", Base Damage: 30, All Damage: " +
+            std::to_string(_ammo * 30);
 }
 
 bool F16::isPriority() {
