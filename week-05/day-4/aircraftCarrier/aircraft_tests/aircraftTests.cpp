@@ -84,3 +84,12 @@ TEST(F16, testFightWithNoAmmo) {
     //Assert
     ASSERT_EQ(result, 0);
 }
+TEST(F16, testPriority) {
+    //Arrange
+    F16 f16test1;
+    //Act
+    bool result = f16test1.isPriority();
+
+    //Assert
+    ASSERT_EQ(result, false);
+}
