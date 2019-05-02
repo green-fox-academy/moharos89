@@ -62,9 +62,9 @@ void AircraftCarrier::fill()
             neededAmmo += _warPlanes[i].getAmmomax() - _warPlanes[i].getAmmo();
         }
         if (neededAmmo < _amountOfAmmo) {
-            for (int i = 0; i < _warPlanes.size(); ++i) {
-                if (_warPlanes[i].isPriority()) {
-                    setAmountOfAmmo(_warPlanes[i].refill(_amountOfAmmo));
+            for (int l = 0; l < _warPlanes.size(); ++l) {
+                if (_warPlanes[l].isPriority()) {
+                    setAmountOfAmmo(_warPlanes[l].refill(_amountOfAmmo));
                 }
             }
             for (int j = 0; j < _warPlanes.size(); ++j) {
@@ -83,6 +83,18 @@ void AircraftCarrier::fill()
 
 std::string AircraftCarrier::status()
 {
-    return std::__cxx11::string();
+    std::string status;
+    status = "HP: " + std::to_string(getHealthPoint()) + ", Aircraft count: " + std::to_string(_warPlanes.size());
+    status + ", Ammo Storage: " + std::to_string(_amountOfAmmo) + ", Total damage ";
+    int sum = 0;
+    for (int i = 0; i < _warPlanes.size(); ++i) {
+        sum += _warPlanes[i].getAmmo() * _warPlanes[i].getBaseDamage();
+    }
+    status + std::to_string(sum) + "\n";
+    status + "Aircrafts: \n";
+    for (int j = 0; j < _warPlanes.size(); ++j) {
+        status + _warPlanes[j].getStatus() + "\n";
+    }
+    return status;
 }
 
