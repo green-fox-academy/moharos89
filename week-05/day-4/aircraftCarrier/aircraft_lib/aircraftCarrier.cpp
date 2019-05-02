@@ -6,8 +6,8 @@
 
 AircraftCarrier::AircraftCarrier()
 {
-    setHealthPoint(2000);
-    setAmountOfAmmo(300);
+    setHealthPoint(200);
+    setAmountOfAmmo(50);
 }
 
 AircraftCarrier::AircraftCarrier(int healthPoint, int amountOfAmmo)
