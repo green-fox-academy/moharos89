@@ -2,25 +2,23 @@
 // Created by Bence on 2019.05.02..
 //
 
-#ifndef AIRCRAFT_F16_H
-#define AIRCRAFT_F16_H
+#ifndef AIRCRAFT_F35_H
+#define AIRCRAFT_F35_H
 
 
 #include "aircraft.h"
 
-class F16 : public Aircraft{
-public:
-    F16();
+class F35 : public Aircraft {
+    F35();
 
+public:
     std::string getType() override;
 
     std::string getStatus() override;
 
     bool isPriority() override;
 
-private:
-
 };
 
 
-#endif //AIRCRAFT_F16_H
+#endif //AIRCRAFT_F35_H

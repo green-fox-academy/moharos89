@@ -21,8 +21,8 @@ std::string F16::getType()
 std::string F16::getStatus()
 {
     std::string status =
-            "Type: " + getType() + ", Ammo: " + std::to_string(_ammo) + ", Base Damage: 30, All Damage: " +
-            std::to_string(_ammo * 30);
+            "Type: " + getType() + ", Ammo: " + std::to_string(getAmmo()) + ", Base Damage: 30, All Damage: " +
+            std::to_string(getAmmo() * getBaseDamage());
     return status;
 }
 
