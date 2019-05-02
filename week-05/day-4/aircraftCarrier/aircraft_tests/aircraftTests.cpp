@@ -55,3 +55,32 @@ TEST(F16, testRefillWithLessThanCapacityAndTestReturnValue) {
     //Assert
     ASSERT_EQ(result, 0);
 }
+TEST(F16, testFightWithFullAmmo) {
+    //Arrange
+    F16 f16test1;
+    //Act
+    f16test1.refill(8);
+    int result = f16test1.fight();
+
+    //Assert
+    ASSERT_EQ(result, 8 * 30);
+}
+TEST(F16, testFightWithNoFullAmmo) {
+    //Arrange
+    F16 f16test1;
+    //Act
+    f16test1.refill(3);
+    int result = f16test1.fight();
+
+    //Assert
+    ASSERT_EQ(result, 3 * 30);
+}
+TEST(F16, testFightWithNoAmmo) {
+    //Arrange
+    F16 f16test1;
+    //Act
+    int result = f16test1.fight();
+
+    //Assert
+    ASSERT_EQ(result, 0);
+}
