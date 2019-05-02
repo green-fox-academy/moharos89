@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 #include "f16.h"
 
-TEST(F16 , testSet_getAmmo) {
+TEST(F16, testSet_getAmmo) {
     //Arrange
     F16 f16test1;
     int ammo = 12;
@@ -15,7 +15,8 @@ TEST(F16 , testSet_getAmmo) {
     //Assert
     ASSERT_EQ(f16test1.getAmmo(), 12);
 }
-TEST(F16 , testRefillWithMoreThanCapacityAndCheckAmmo) {
+
+TEST(F16, testRefillWithMoreThanCapacityAndCheckAmmo) {
     //Arrange
     F16 f16test1;
     //Act
@@ -24,7 +25,8 @@ TEST(F16 , testRefillWithMoreThanCapacityAndCheckAmmo) {
     //Assert
     ASSERT_EQ(f16test1.getAmmo(), 8);
 }
-TEST(F16 , testRefillWithMoreThanCapacityAndTestReturnValue) {
+
+TEST(F16, testRefillWithMoreThanCapacityAndTestReturnValue) {
     //Arrange
     F16 f16test1;
     //Act
@@ -32,4 +34,24 @@ TEST(F16 , testRefillWithMoreThanCapacityAndTestReturnValue) {
 
     //Assert
     ASSERT_EQ(result, 23 - 8);
+}
+
+TEST(F16, testRefillWithLessThanCapacityAndCheckAmmo) {
+    //Arrange
+    F16 f16test1;
+    //Act
+    f16test1.refill(4);
+
+    //Assert
+    ASSERT_EQ(f16test1.getAmmo(), 4);
+}
+
+TEST(F16, testRefillWithLessThanCapacityAndTestReturnValue) {
+    //Arrange
+    F16 f16test1;
+    //Act
+    int result = f16test1.refill(5);
+
+    //Assert
+    ASSERT_EQ(result, 0);
 }
