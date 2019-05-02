@@ -11,13 +11,36 @@
 class Aircraft {
 public:
     Aircraft();
-    virtual int fight() = 0;
-    virtual int refill(int ammo) = 0;
+
+    int getAmmo() const;
+
+    void setAmmo(int ammo);
+
+    int getAmmomax() const;
+
+    void setAmmomax(int ammomax);
+
+    int getBaseDamage() const;
+
+    void setBaseDamage(int baseDamage);
+
+    int fight();
+
+    int refill(int ammo);
+
     virtual std::string getType() = 0;
+
     virtual std::string getStatus() = 0;
+
     virtual bool isPriority() = 0;
 
 private:
+    int _ammo;
+
+
+private:
+    int _ammomax;
+    int _baseDamage;
 
 
 };

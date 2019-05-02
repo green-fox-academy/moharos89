@@ -12,14 +12,6 @@ class F16 : public Aircraft{
 public:
     F16();
 
-    int fight() override;
-
-    int refill(int ammo) override;
-
-    int getAmmo() const;
-
-    void setAmmo(int ammo);
-
     std::string getType() override;
 
     std::string getStatus() override;
