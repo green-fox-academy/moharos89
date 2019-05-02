@@ -35,6 +35,7 @@ int main() {
     boat1.fill();
     boat1.fight(&boat2);
     boat1.fill();
+    boat1.fight(&boat2);
     std::cout << boat2.status() << std::endl;
     std::cout << boat1.status() << std::endl;
     std::cout << "Hello, World!" << std::endl;

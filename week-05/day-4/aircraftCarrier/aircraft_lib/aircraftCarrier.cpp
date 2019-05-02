@@ -6,8 +6,8 @@
 
 AircraftCarrier::AircraftCarrier()
 {
-    setHealthPoint(200);
-    setAmountOfAmmo(50);
+    setHealthPoint(2000);
+    setAmountOfAmmo(500);
 }
 
 AircraftCarrier::AircraftCarrier(int healthPoint, int amountOfAmmo)
@@ -109,8 +109,13 @@ std::string AircraftCarrier::status()
 void AircraftCarrier::fight(AircraftCarrier *aircraftCarrier)
 {
     for (int i = 0; i < _warPlanes.size(); ++i) {
-        int remainingHealth = aircraftCarrier->getHealthPoint() - _warPlanes[i]->fight();
-        aircraftCarrier->setHealthPoint(remainingHealth);
+        if (aircraftCarrier->getHealthPoint() > 0) {
+            int remainingHealth = aircraftCarrier->getHealthPoint() - _warPlanes[i]->fight();
+            aircraftCarrier->setHealthPoint(remainingHealth);
+        }
+    }
+    if (aircraftCarrier->getHealthPoint() <= 0) {
+        std::cout << "The target destroyed!" << std::endl;
     }
 }
 
