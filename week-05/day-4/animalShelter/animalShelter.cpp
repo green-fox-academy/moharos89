@@ -42,16 +42,19 @@ void AnimalShelter::setAdopters(const std::vector<std::string> &adopters)
 int AnimalShelter::rescue(Animal *animal)
 {
     _animals.push_back(animal);
+    return _animals.size();
 }
 
 int AnimalShelter::heal()
 {
     for (int i = 0; i < _animals.size(); ++i) {
         if (!_animals[i]->isIsHealthy() && _budget >= _animals[i]->getHealCost()) {
+            setBudget(getBudget() - _animals[i]->getHealCost());
             _animals[i]->setIsHealthy(true);
-            break;
+            return 1;
         }
     }
+    return 0;
 }
 
 void AnimalShelter::addAdopter(std::string name)
@@ -76,5 +79,8 @@ void AnimalShelter::toString()
 {
     std::cout << "Budget: " << getBudget() << "E,\n" << "There are " << _animals.size() << " animal(s) and "
               << _adopters.size() << " potentional adopter(s)" << std::endl;
+    for (int i = 0; i < _animals.size(); ++i) {
+        _animals[i]->toString();
+    }
 
 }

@@ -7,7 +7,7 @@
 Parrot::Parrot()
 {
     setHealCost(rand() % 7 + 4);
-    setName("arrot");
+    setName("Parrot");
 }
 
 Parrot::Parrot(const std::string &name) : Animal(name)

@@ -64,7 +64,7 @@ bool Animal::isAdoptable()
 void Animal::toString()
 {
     if(_isHealthy) {
-        std::cout << _name << " is healthy, and adoptable";
+        std::cout << _name << " is healthy, and adoptable" << std::endl;
     } else {
         std::cout << _name << " is not healthy (" << std::to_string(_healCost) << "), and not adoptable" << std::endl;
     }
