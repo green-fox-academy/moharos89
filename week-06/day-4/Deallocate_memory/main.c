@@ -17,7 +17,7 @@ int main()
         printf("%d\n" , pointer[j]);
     }
 
-    free(pointer);
+    pointer = realloc(pointer , 0);
     pointer = NULL;
 
     return 0;
