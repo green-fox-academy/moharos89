@@ -16,6 +16,7 @@ void init_led1();
 void init_led2();
 void init_led3();
 void init_led4();
+void init_it_button();
 void init_it_button_starter();
 void EXTI4_IRQHandler();
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
@@ -24,7 +25,7 @@ typedef struct {
 	unsigned int counter :4;
 } counter_t;
 
-volatile status = 0;
+volatile int status = 0;
 
 int main(void)
 {
