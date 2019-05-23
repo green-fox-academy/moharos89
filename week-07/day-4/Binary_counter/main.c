@@ -7,10 +7,11 @@
  * @brief   Default main function.
  ******************************************************************************
  */
-
+#include "stm32f7xx_hal.h"
 #include "stm32f7xx.h"
 #include "stm32746g_discovery.h"
 #include <stdint.h>
+
 
 void init_led1();
 void init_led2();
