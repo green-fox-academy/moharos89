@@ -37,27 +37,13 @@ int main(void)
 	HAL_TIM_PWM_Start(&pwm_timer, TIM_CHANNEL_1);
 	HAL_TIM_Base_Start(&base_timer);
 	uint16_t timer_value;
-	int signal = 0;
 	uint16_t counter = 1;
 
 	while (1) {
 		timer_value = __HAL_TIM_GET_COUNTER(&base_timer);
-		if (timer_value == 0) {
-			if (signal == 0) {
-				counter += 1;
-			} else {
-				counter -= 1;
-			}
-		}
-		if (counter == 99) {
-			signal = 1;
-		}
-		if (counter == 1) {
-			signal = 0;
-		}
+		counter = (float) timer_value / (float) (base_timer.Init.Period + 1) * 100;
 		__HAL_TIM_SET_COMPARE(&pwm_timer, TIM_CHANNEL_1, counter);
 	}
-	return 0;
 }
 
 void led_init()
@@ -83,8 +69,8 @@ void base_timer_init()
 
 	base_timer.Instance = TIM3;
 	base_timer.Init.Prescaler = 54000 - 1;
-	base_timer.Init.Period = 200 - 1;
-	base_timer.Init.CounterMode = TIM_COUNTERMODE_UP;
+	base_timer.Init.Period = 20000 - 1;
+	base_timer.Init.CounterMode = TIM_COUNTERMODE_CENTERALIGNED1;
 	base_timer.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 
 	HAL_TIM_Base_Init(&base_timer);
