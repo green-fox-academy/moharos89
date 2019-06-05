@@ -37,12 +37,11 @@ char *file_reader(char file_name[])
     if (file != NULL) {
         int status = 0;
         char binary[8];
-        while (fscanf(file, "%s", &binary) != EOF) {
+        while (fscanf(file, "%s", binary) != EOF) {
             char letter = binary_to_char(binary);
             char temp[2];
             temp[0] = letter;
             temp[1] = '\0';
-            printf("%c", letter);
             result = (char *) realloc(result, (strlen(result) + 2) * sizeof(char));
             if (status == 0) {
                 strcpy(result, temp);
@@ -51,6 +50,8 @@ char *file_reader(char file_name[])
                 strcat(result, temp);
             }
         }
+    } else {
+        printf("Can not open file: %s\n" , file_name);
     }
 
     fclose(file);
