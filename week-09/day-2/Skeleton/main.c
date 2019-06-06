@@ -361,4 +361,20 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	/*User code here*/
 }
 
+/*Random number generator Typedef*/
+RNG_HandleTypeDef rng;
+
+/*Random number generator initialization*/
+
+void RNG_init()
+{
+	__HAL_RCC_RNG_CLK_ENABLE();
+	rng.Instance = RNG;
+	HAL_RNG_Init(&rng);
+}
+
+/*Random number generator calling*/
+HAL_RNG_GenerateRandomNumber(&rng, &rand_num);
+
+
 
