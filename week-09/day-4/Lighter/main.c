@@ -73,7 +73,7 @@ void init_ext_it_button_spark()
 	GPIO_InitTypeDef button_ext_it;
 
 	button_ext_it.Pin = GPIO_PIN_2;
-	button_ext_it.Mode = GPIO_MODE_IT_FALLING;
+	button_ext_it.Mode = GPIO_MODE_IT_RISING;
 	button_ext_it.Pull = GPIO_NOPULL;
 	button_ext_it.Speed = GPIO_SPEED_FREQ_HIGH;
 
