@@ -353,7 +353,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 
 void EXTI9_5_IRQHandler()
 {
-	HAL_EXTI_IRQHandler(EXTI9_5_IRQn);
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_7);
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
