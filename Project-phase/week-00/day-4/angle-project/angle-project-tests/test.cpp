@@ -1,6 +1,7 @@
-#include "pch.h"
+
+#include "gtest/gtest.h"
+#include "angle-projectFunctions.h"
 
 TEST(TestCaseName, TestName) {
-  EXPECT_EQ(1, 1);
-  EXPECT_TRUE(true);
+  EXPECT_EQ(add(3 ,5) , 8);
 }
